@@ -7,22 +7,22 @@ import (
 )
 
 var (
-	//AppMode debug或者release
+	// AppMode debug或者release
 	AppMode string
-	//HTTPPort 默认端口号
+	// HTTPPort 默认端口号
 	HTTPPort string
 
-	//Db db used, e.g. mysql, pgsql
+	// Db db used, e.g. mysql, pgsql
 	Db string
-	//DbHost db hostname
+	// DbHost db hostname
 	DbHost string
-	//DbPort db port
+	// DbPort db port
 	DbPort string
-	//DbUser username
+	// DbUser username
 	DbUser string
-	//DbPassword db password
+	// DbPassword db password
 	DbPassword string
-	//DbName db name
+	// DbName db name
 	DbName string
 )
 

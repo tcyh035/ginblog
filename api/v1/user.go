@@ -1,10 +1,14 @@
 package v1
 
 import (
+	"ginblog/model"
 	"ginblog/utils/errmsg"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
+
+var code int
 
 // UserExist 查询用户是否存在
 func UserExist() {
@@ -13,10 +17,19 @@ func UserExist() {
 
 // AddUser 添加用户
 func AddUser(c *gin.Context) {
+	var data model.User
+	c.ShouldBindJSON(&data)
+	code = model.CheckUserExist(data.Username)
+	if code == errmsg.Success {
+		model.CreateUser(&data)
+	}
 
+	c.JSON(http.StatusOK, gin.H{
+		"status":  code,
+		"data":    data,
+		"message": errmsg.GetErrorMessage(code),
+	})
 }
-
-// 查询单个用户
 
 // GetUsers 查询用户列表
 func GetUsers(c *gin.Context) {

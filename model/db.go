@@ -15,15 +15,13 @@ var err error
 
 //InitDb 初始化数据库
 func InitDb() {
-	db, err := gorm.Open(utils.Db, fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
+	db, err = gorm.Open(utils.Db, fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		utils.DbUser,
 		utils.DbPassword,
 		utils.DbHost,
 		utils.DbPort,
 		utils.DbName,
 	))
-
-	defer db.Close()
 
 	if err != nil {
 		fmt.Println("连接数据库失败，请检查参数：", err)

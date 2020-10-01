@@ -34,3 +34,18 @@ func CreateUser(data *User) int {
 
 	return errmsg.Success
 }
+
+// GetUsers 查询用户列表
+func GetUsers(pageSize int, pageNum int) []User {
+	var users []User
+	err = db.Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&users).Error
+	if err != nil {
+		return nil
+	}
+
+	return users
+}
+
+// EditUser 编辑用户
+
+// DeleteUser 删除用户

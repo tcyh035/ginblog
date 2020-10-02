@@ -13,6 +13,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/ugorji/go v1.1.8 // indirect
+	golang.org/x/crypto v0.0.0-20201001193750-eb9a90e9f9cb
 	golang.org/x/sys v0.0.0-20200926100807-9d91bd62050c // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
 	gopkg.in/ini.v1 v1.61.0

@@ -54,6 +54,15 @@ func GetUsers(pageSize int, pageNum int) []User {
 // EditUser 编辑用户
 
 // DeleteUser 删除用户
+func DeleteUser(id int) int {
+	var user User
+	err = db.Where("id = ?", id).Delete(&user).Error
+	if err != nil {
+		return errmsg.Error
+	}
+
+	return errmsg.Success
+}
 
 // BeforeSave 加密
 func (u *User) BeforeSave() {

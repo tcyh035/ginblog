@@ -10,8 +10,8 @@ import (
 //User 用户model
 type User struct {
 	gorm.Model
-	Username string `gorm:"type:varchar(20);not null " json:"username"`
-	Password string `gorm:"type:varchar(200);not null " json:"password"`
+	Username string `gorm:"type:varchar(20);not null" json:"username"`
+	Password string `gorm:"type:varchar(200);not null" json:"password"`
 	Role     int    `gorm:"type:int " json:"role"`
 }
 
@@ -28,7 +28,6 @@ func CheckUserExist(name string) int {
 
 // CreateUser 创建用户
 func CreateUser(data *User) int {
-	data.Password = GetSrcyptPassword(data.Password)
 	if data.Password == "" {
 		return errmsg.Error
 	}
@@ -55,6 +54,11 @@ func GetUsers(pageSize int, pageNum int) []User {
 // EditUser 编辑用户
 
 // DeleteUser 删除用户
+
+// BeforeSave 加密
+func (u *User) BeforeSave() {
+	u.Password = GetSrcyptPassword(u.Password)
+}
 
 // GetSrcyptPassword 获取密码
 func GetSrcyptPassword(password string) string {

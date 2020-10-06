@@ -57,7 +57,21 @@ func GetUsers(c *gin.Context) {
 
 //EditUser 编辑用户
 func EditUser(c *gin.Context) {
+	var data model.User
+	c.ShouldBindJSON(&data)
+	id, _ := strconv.Atoi(c.Param("id"))
 
+	code = model.CheckUserExist(data.Username)
+	if code == errmsg.Success {
+		model.EditUser(id, &data)
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":  code,
+		"id":      id,
+		"data":    data,
+		"message": errmsg.GetErrorMessage(code),
+	})
 }
 
 //DeleteUser 删除用户

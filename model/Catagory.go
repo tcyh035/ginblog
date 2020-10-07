@@ -19,6 +19,8 @@ func CheckCatagoryExist(name string) int {
 	return errmsg.Success
 }
 
+// todo 查询分类下的所有文章
+
 // CreateCatagory 创建分类
 func CreateCatagory(data *Catagory) int {
 	err = db.Create(&data).Error

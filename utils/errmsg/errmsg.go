@@ -20,6 +20,9 @@ const (
 	ErrorTokenWrong = 1006
 	// ErrorTokenTypeWrong Token格式错误
 	ErrorTokenTypeWrong = 10007
+
+	// ErrorCatagoryUsed 分类已被使用
+	ErrorCatagoryUsed = 2001
 )
 
 var codemsg = map[int]string{
@@ -32,6 +35,7 @@ var codemsg = map[int]string{
 	ErrorTokenRuntime:   "Token已过期",
 	ErrorTokenWrong:     "Token不正确",
 	ErrorTokenTypeWrong: "Token格式错误",
+	ErrorCatagoryUsed:   "分类已存在",
 }
 
 // GetErrorMessage 得到错误信息

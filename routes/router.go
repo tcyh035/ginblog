@@ -14,14 +14,19 @@ func InitRouter() *gin.Engine {
 
 	router := engine.Group("api/v1")
 	{
-		// 用户模块路由接口
+		// user module router
 		router.POST("user/add", v1.AddUser)
 		router.GET("users", v1.GetUsers)
 		router.PUT("user/:id", v1.EditUser)
 		router.DELETE("user/:id", v1.DeleteUser)
-		// 分类模块路由接口
 
-		// 文章模块路由接口
+		// category module router
+		router.POST("catagory/add", v1.AddCatagory)
+		router.GET("catagories", v1.GetCatagories)
+		router.PUT("catagory/:id", v1.EditCatagory)
+		router.DELETE("catagory/:id", v1.DeleteCatagory)
+
+		// article module router
 	}
 
 	return engine

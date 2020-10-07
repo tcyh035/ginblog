@@ -18,7 +18,7 @@ type User struct {
 // CheckUserExist 查询用户是否存在
 func CheckUserExist(name string) int {
 	var user User
-	db.First(&user, "Username = ?", name)
+	db.First(&user, "username = ?", name)
 	if user.ID > 0 {
 		return errmsg.ErrorUserNameUsed
 	}
@@ -32,7 +32,7 @@ func CreateUser(data *User) int {
 		return errmsg.Error
 	}
 
-	err := db.Create(&data).Error
+	err = db.Create(&data).Error
 	if err != nil {
 		return errmsg.Error
 	}
@@ -53,7 +53,7 @@ func GetUsers(pageSize int, pageNum int) []User {
 
 // EditUser 编辑用户
 func EditUser(id int, data *User) int {
-	var userMap = make(map[string]interface{})
+	userMap := make(map[string]interface{})
 	userMap["username"] = data.Username
 	userMap["role"] = data.Role
 
@@ -64,7 +64,6 @@ func EditUser(id int, data *User) int {
 	}
 
 	return errmsg.Success
-
 }
 
 // DeleteUser 删除用户

@@ -11,15 +11,11 @@ import (
 
 var code int
 
-// UserExist 查询用户是否存在
-func UserExist() {
-	//
-}
-
 // AddUser 添加用户
 func AddUser(c *gin.Context) {
 	var data model.User
 	c.ShouldBindJSON(&data)
+	
 	code = model.CheckUserExist(data.Username)
 	if code == errmsg.Success {
 		model.CreateUser(&data)

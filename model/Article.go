@@ -8,7 +8,7 @@ import (
 
 //Article 文章model
 type Article struct {
-	Catagory Catagory
+	Category Category `gorm:"ForeignKey:Cid"`
 	gorm.Model
 	Title   string `gorm:"type:varchar(100);not null" json:"title"`
 	Cid     int    `gorm:"type:int;not null" json:"cid"`
@@ -17,9 +17,27 @@ type Article struct {
 	Img     string `gorm:"type:varchar(100)" json:"img"`
 }
 
-// todo 查询分类下的所有文章
+// GetArticlesByCategory 查询分类下的所有文章
+func GetArticlesByCategory(category int, pageSize int, pageNum int) ([]Article, int) {
+	var articles []Article
+	err = db.Preload("Category").Where("Cid = ?", category).Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&articles).Error
+	if err != nil {
+		return nil, errmsg.Error
+	}
 
-// todo 查询单个文章
+	return articles, errmsg.Success
+}
+
+// GetArticle 查询单个文章
+func GetArticle(id int) (Article, int) {
+	var article Article
+	err = db.Preload("Category").Where("id = ?", id).Find(&article).Error
+	if err != nil {
+		return article, errmsg.ErrorArticleNotExist
+	}
+
+	return article, errmsg.Success
+}
 
 // CreateArticle 新增文章
 func CreateArticle(data *Article) int {
@@ -32,14 +50,14 @@ func CreateArticle(data *Article) int {
 }
 
 // GetArticles 查询文章列表
-func GetArticles(pageSize int, pageNum int) []Article {
+func GetArticles(pageSize int, pageNum int) ([]Article, int) {
 	var articles []Article
-	err = db.Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&articles).Error
+	err = db.Preload("Category").Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&articles).Error
 	if err != nil {
-		return nil
+		return nil, errmsg.Error
 	}
 
-	return articles
+	return articles, errmsg.Success
 }
 
 // EditArticle 编辑文章

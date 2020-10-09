@@ -23,9 +23,40 @@ func AddArticle(c *gin.Context) {
 	})
 }
 
-// todo 查询分类下的所有文章
+// GetArticlesByCategory 查询分类下的所有文章
+func GetArticlesByCategory(c *gin.Context) {
+	pageSize, _ := strconv.Atoi(c.Query("pagesize"))
+	pageNum, _ := strconv.Atoi(c.Query("pagenum"))
+	category, _ := strconv.Atoi(c.Param("category"))
 
-// todo 查询单个文章
+	if pageSize == 0 {
+		pageSize = -1
+	}
+
+	if pageNum == 0 {
+		pageNum = -1
+	}
+
+	data, code := model.GetArticlesByCategory(category, pageSize, pageNum)
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":  code,
+		"data":    data,
+		"message": errmsg.GetErrorMessage(code),
+	})
+}
+
+// GetArticle 查询单个文章
+func GetArticle(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	data, code := model.GetArticle(id)
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":  code,
+		"data":    data,
+		"message": errmsg.GetErrorMessage(code),
+	})
+}
 
 // GetArticles 查询文章列表
 func GetArticles(c *gin.Context) {
@@ -40,8 +71,7 @@ func GetArticles(c *gin.Context) {
 		pageNum = -1
 	}
 
-	data := model.GetCatagories(pageSize, pageNum)
-	code = errmsg.Success
+	data, code := model.GetArticles(pageSize, pageNum)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,

@@ -21,14 +21,16 @@ func InitRouter() *gin.Engine {
 		router.DELETE("user/:id", v1.DeleteUser)
 
 		// category module router
-		router.POST("catagory/add", v1.AddCatagory)
-		router.GET("catagories", v1.GetCatagories)
-		router.PUT("catagory/:id", v1.EditCatagory)
-		router.DELETE("catagory/:id", v1.DeleteCatagory)
+		router.POST("category/add", v1.AddCategory)
+		router.GET("categories", v1.GetCategories)
+		router.PUT("category/:id", v1.EditCategory)
+		router.DELETE("category/:id", v1.DeleteCategory)
 
 		// article module router
 		router.POST("article/add", v1.AddArticle)
 		router.GET("articles", v1.GetArticles)
+		router.GET("article/list/:category", v1.GetArticlesByCategory)
+		router.GET("article/info/:id", v1.GetArticle)
 		router.PUT("article/:id", v1.EditArticle)
 		router.DELETE("article/:id", v1.DeleteArticle)
 	}

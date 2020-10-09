@@ -30,7 +30,7 @@ func InitDb() {
 	// 禁用默认表名的复数形式
 	db.SingularTable(true)
 
-	db.AutoMigrate(&User{}, &Article{}, &Catagory{})
+	db.AutoMigrate(&User{}, &Article{}, &Category{})
 
 	db.DB().SetMaxIdleConns(10)
 

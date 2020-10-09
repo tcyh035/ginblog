@@ -9,14 +9,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// AddCatagory 添加分类
-func AddCatagory(c *gin.Context) {
-	var data model.Catagory
+// AddCategory 添加分类
+func AddCategory(c *gin.Context) {
+	var data model.Category
 	c.ShouldBindJSON(&data)
 
-	code = model.CheckCatagoryExist(data.Name)
+	code = model.CheckCategoryExist(data.Name)
 	if code == errmsg.Success {
-		model.CreateCatagory(&data)
+		model.CreateCategory(&data)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
@@ -26,8 +26,8 @@ func AddCatagory(c *gin.Context) {
 	})
 }
 
-// GetCatagories 查询分类列表
-func GetCatagories(c *gin.Context) {
+// GetCategories 查询分类列表
+func GetCategories(c *gin.Context) {
 	pageSize, _ := strconv.Atoi(c.Query("pagesize"))
 	pageNum, _ := strconv.Atoi(c.Query("pagenum"))
 
@@ -49,15 +49,15 @@ func GetCatagories(c *gin.Context) {
 	})
 }
 
-// EditCatagory 编辑分类
-func EditCatagory(c *gin.Context) {
-	var data model.Catagory
+// EditCategory 编辑分类
+func EditCategory(c *gin.Context) {
+	var data model.Category
 	c.ShouldBindJSON(&data)
 	id, _ := strconv.Atoi(c.Param("id"))
 
-	code = model.CheckCatagoryExist(data.Name)
+	code = model.CheckCategoryExist(data.Name)
 	if code == errmsg.Success {
-		model.EditCatagory(id, &data)
+		model.EditCategory(id, &data)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
@@ -68,11 +68,11 @@ func EditCatagory(c *gin.Context) {
 	})
 }
 
-// DeleteCatagory 删除分类
-func DeleteCatagory(c *gin.Context) {
+// DeleteCategory 删除分类
+func DeleteCategory(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 
-	code = model.DeleteCatagory(id)
+	code = model.DeleteCategory(id)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,

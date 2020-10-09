@@ -21,21 +21,28 @@ const (
 	// ErrorTokenTypeWrong Token格式错误
 	ErrorTokenTypeWrong = 10007
 
-	// ErrorCatagoryUsed 分类已被使用
-	ErrorCatagoryUsed = 2001
+	// ErrorCategoryUsed 分类已被使用
+	ErrorCategoryUsed = 2001
+	// ErrorCategoryNotExist 分类不存在
+	ErrorCategoryNotExist = 2002
+
+	// ErrorArticleNotExist 文章不存在
+	ErrorArticleNotExist = 3001
 )
 
 var codemsg = map[int]string{
-	Success:             "OK",
-	Error:               "FAIL",
-	ErrorUserNameUsed:   "用户名已存在",
-	ErrorPasswordWrong:  "密码错误",
-	ErrorUserNotExist:   "用户不存在",
-	ErrorTokenNotExist:  "Token不存在",
-	ErrorTokenRuntime:   "Token已过期",
-	ErrorTokenWrong:     "Token不正确",
-	ErrorTokenTypeWrong: "Token格式错误",
-	ErrorCatagoryUsed:   "分类已存在",
+	Success:               "OK",
+	Error:                 "FAIL",
+	ErrorUserNameUsed:     "用户名已存在",
+	ErrorPasswordWrong:    "密码错误",
+	ErrorUserNotExist:     "用户不存在",
+	ErrorTokenNotExist:    "Token不存在",
+	ErrorTokenRuntime:     "Token已过期",
+	ErrorTokenWrong:       "Token不正确",
+	ErrorTokenTypeWrong:   "Token格式错误",
+	ErrorCategoryUsed:     "分类已存在",
+	ErrorCategoryNotExist: "分类不存在",
+	ErrorArticleNotExist:  "文章不存在",
 }
 
 // GetErrorMessage 得到错误信息

@@ -91,3 +91,22 @@ func GetSrcyptPassword(password string) string {
 
 	return string(pw[:])
 }
+
+// CheckLogin 登陆验证
+func CheckLogin(username string, password string) int {
+	var user User
+	db.Where("username = ?", username).First(&user)
+	if user.ID == 0 {
+		return errmsg.ErrorUserNotExist
+	}
+
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)); err != nil {
+		return errmsg.ErrorPasswordWrong
+	}
+
+	if user.Role != 0 {
+		return errmsg.ErrorUserNoRight
+	}
+
+	return errmsg.Success
+}

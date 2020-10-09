@@ -20,6 +20,8 @@ const (
 	ErrorTokenWrong = 1006
 	// ErrorTokenTypeWrong Token格式错误
 	ErrorTokenTypeWrong = 10007
+	// ErrorUserNoRight 用户没权限
+	ErrorUserNoRight = 10008
 
 	// ErrorCategoryUsed 分类已被使用
 	ErrorCategoryUsed = 2001
@@ -43,6 +45,7 @@ var codemsg = map[int]string{
 	ErrorCategoryUsed:     "分类已存在",
 	ErrorCategoryNotExist: "分类不存在",
 	ErrorArticleNotExist:  "文章不存在",
+	ErrorUserNoRight:      "用户没权限",
 }
 
 // GetErrorMessage 得到错误信息

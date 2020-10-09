@@ -11,7 +11,8 @@ var (
 	AppMode string
 	// HTTPPort 默认端口号
 	HTTPPort string
-
+	// JwtKey 默认JwtKey生成
+	JwtKey string
 	// Db db used, e.g. mysql, pgsql
 	Db string
 	// DbHost db hostname
@@ -39,6 +40,7 @@ func init() {
 func loadServer(file *ini.File) {
 	AppMode = file.Section("server").Key("AppMode").MustString("debug")
 	HTTPPort = file.Section("server").Key("HTTPPort").MustString("8080")
+	JwtKey = file.Section("server").Key("JwtKey").MustString("dcg11.RF,!")
 }
 
 func loadDatabase(file *ini.File) {

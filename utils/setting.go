@@ -25,6 +25,15 @@ var (
 	DbPassword string
 	// DbName db name
 	DbName string
+
+	// AccessKey 公钥
+	AccessKey string
+	// SecretKey 私钥
+	SecretKey string
+	// Bucket bucket名
+	Bucket string
+	// QiniuServer 服务器地址
+	QiniuServer string
 )
 
 func init() {
@@ -32,8 +41,10 @@ func init() {
 	if err != nil {
 		fmt.Println("配置文件读取错误，请检查文件路径")
 	}
+
 	loadServer(file)
 	loadDatabase(file)
+	loadQiniu(file)
 }
 
 //
@@ -50,4 +61,11 @@ func loadDatabase(file *ini.File) {
 	DbUser = file.Section("database").Key("DbUser").MustString("root")
 	DbPassword = file.Section("database").Key("DbPassword").MustString("admin")
 	DbName = file.Section("database").Key("DbName").MustString("ginblog")
+}
+
+func loadQiniu(file *ini.File) {
+	AccessKey = file.Section("qiniu").Key("AccessKey").String()
+	SecretKey = file.Section("qiniu").Key("SecretKey").String()
+	Bucket = file.Section("qiniu").Key("Bucket").String()
+	QiniuServer = file.Section("qiniu").Key("QiniuServer").String()
 }

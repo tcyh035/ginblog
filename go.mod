@@ -19,4 +19,5 @@ require (
 	google.golang.org/protobuf v1.25.0 // indirect
 	gopkg.in/ini.v1 v1.61.0
 	gopkg.in/yaml.v2 v2.3.0 // indirect
+	github.com/qiniu/api.v7/v7 v7.4.0
 )

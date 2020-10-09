@@ -29,6 +29,9 @@ func InitRouter() *gin.Engine {
 		auth.POST("article/add", v1.AddArticle)
 		auth.PUT("article/:id", v1.EditArticle)
 		auth.DELETE("article/:id", v1.DeleteArticle)
+
+		// upload file
+		auth.POST("upload", v1.Upload)
 	}
 
 	router := engine.Group("api/v1")

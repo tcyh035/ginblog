@@ -32,14 +32,15 @@ func CreateCategory(data *Category) int {
 }
 
 // GetCatagories 查询分类列表
-func GetCatagories(pageSize int, pageNum int) []Category {
+func GetCatagories(pageSize int, pageNum int) ([]Category, int) {
 	var catagories []Category
-	err = db.Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&catagories).Error
+	var total int
+	err = db.Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&catagories).Count(&total).Error
 	if err != nil {
-		return nil
+		return nil, 0
 	}
 
-	return catagories
+	return catagories, total
 }
 
 // EditCategory 编辑分类

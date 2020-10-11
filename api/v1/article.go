@@ -37,11 +37,12 @@ func GetArticlesByCategory(c *gin.Context) {
 		pageNum = -1
 	}
 
-	data, code := model.GetArticlesByCategory(category, pageSize, pageNum)
+	data, code, total := model.GetArticlesByCategory(category, pageSize, pageNum)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,
 		"data":    data,
+		"total":   total,
 		"message": errmsg.GetErrorMessage(code),
 	})
 }
@@ -71,11 +72,12 @@ func GetArticles(c *gin.Context) {
 		pageNum = -1
 	}
 
-	data, code := model.GetArticles(pageSize, pageNum)
+	data, code, total := model.GetArticles(pageSize, pageNum)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,
 		"data":    data,
+		"total":   total,
 		"message": errmsg.GetErrorMessage(code),
 	})
 }

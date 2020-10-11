@@ -18,14 +18,15 @@ type Article struct {
 }
 
 // GetArticlesByCategory 查询分类下的所有文章
-func GetArticlesByCategory(category int, pageSize int, pageNum int) ([]Article, int) {
+func GetArticlesByCategory(category int, pageSize int, pageNum int) ([]Article, int, int) {
 	var articles []Article
-	err = db.Preload("Category").Where("Cid = ?", category).Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&articles).Error
+	var total int
+	err = db.Preload("Category").Where("Cid = ?", category).Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&articles).Count(&total).Error
 	if err != nil {
-		return nil, errmsg.Error
+		return nil, errmsg.Error, 0
 	}
 
-	return articles, errmsg.Success
+	return articles, errmsg.Success, total
 }
 
 // GetArticle 查询单个文章
@@ -50,14 +51,15 @@ func CreateArticle(data *Article) int {
 }
 
 // GetArticles 查询文章列表
-func GetArticles(pageSize int, pageNum int) ([]Article, int) {
+func GetArticles(pageSize int, pageNum int) ([]Article, int, int) {
 	var articles []Article
-	err = db.Preload("Category").Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&articles).Error
+	var total int
+	err = db.Preload("Category").Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&articles).Count(&total).Error
 	if err != nil {
-		return nil, errmsg.Error
+		return nil, errmsg.Error, 0
 	}
 
-	return articles, errmsg.Success
+	return articles, errmsg.Success, total
 }
 
 // EditArticle 编辑文章

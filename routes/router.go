@@ -11,7 +11,8 @@ import (
 // InitRouter 初始化Router
 func InitRouter() *gin.Engine {
 	gin.SetMode(utils.AppMode)
-	engine := gin.Default()
+	engine := gin.New()
+	engine.Use(gin.Recovery())
 
 	auth := engine.Group("api/v1")
 	auth.Use(middleware.JwtToken())
